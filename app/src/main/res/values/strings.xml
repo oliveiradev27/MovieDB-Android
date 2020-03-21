@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MovieDB App</string>
+    <string name="moviedb_logo">Aplicativo MovieDB</string>
 </resources>
