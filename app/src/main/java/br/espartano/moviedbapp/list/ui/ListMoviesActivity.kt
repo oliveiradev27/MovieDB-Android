@@ -2,11 +2,10 @@ package br.espartano.moviedbapp.list.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.espartano.moviedbapp.R
 import br.espartano.moviedbapp.data.Movie
@@ -51,6 +50,7 @@ class ListMoviesActivity : AppCompatActivity() {
     }
 
     private fun initializeViews() {
+        recyclerMovies.layoutManager = GridLayoutManager(this, 2)
         recyclerMovies.adapter = MoviesAdapter(movies)
     }
 }
