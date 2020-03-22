@@ -3,6 +3,7 @@ package br.espartano.moviedbapp.list.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -21,6 +22,9 @@ class ListMoviesActivity : AppCompatActivity() {
         findViewById<RecyclerView>(R.id.recycler_movies)
     }
 
+    private val toolbar : Toolbar by lazy {
+        findViewById<Toolbar>(R.id.toolbar)
+    }
     private val viewModel: ListMoviesViewModel by lazy {
         ViewModelProvider(this@ListMoviesActivity,
             ListMoviesViewModel.ListMoviesViewModelFactory(MoviesNetworkRepository()))
@@ -50,6 +54,7 @@ class ListMoviesActivity : AppCompatActivity() {
     }
 
     private fun initializeViews() {
+        setSupportActionBar(toolbar)
         recyclerMovies.layoutManager = GridLayoutManager(this, 2)
         recyclerMovies.adapter = MoviesAdapter(movies)
     }
