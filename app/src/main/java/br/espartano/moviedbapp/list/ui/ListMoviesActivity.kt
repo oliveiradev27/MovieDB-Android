@@ -39,18 +39,23 @@ class ListMoviesActivity : AppCompatActivity() {
     }
 
     private fun configureStates() {
-        viewModel.getState()
+        viewModel
+            .getState()
             .observe(this, Observer {
-            when (it) {
-                is ListMoviesStates.Loading -> Toast.makeText(this, "carregando..", Toast.LENGTH_LONG).show()
-                is ListMoviesStates.LoadSuccessMovies ->{
-                    movies.addAll(it.movies)
-                    recyclerMovies.adapter?.notifyDataSetChanged()
-                }
-                is ListMoviesStates.Error -> Toast.makeText(this, it.t.message, Toast.LENGTH_LONG).show()
-            }
+                mapActionsForState(it)
         })
         viewModel.getPopularMovies()
+    }
+
+    private fun mapActionsForState(state: ListMoviesStates) {
+        when (state) {
+            is ListMoviesStates.Loading -> Toast.makeText(this, "carregando..", Toast.LENGTH_LONG).show()
+            is ListMoviesStates.LoadSuccessMovies -> {
+                movies.addAll(state.movies)
+                recyclerMovies.adapter?.notifyDataSetChanged()
+            }
+            is ListMoviesStates.Error -> Toast.makeText(this, state.t.message, Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun initializeViews() {
