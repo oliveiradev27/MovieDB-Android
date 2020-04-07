@@ -26,8 +26,8 @@ class ListMoviesViewModel(private val repository: MoviesRepository): ViewModel()
 
     class ListMoviesViewModelFactory(private val repository: MoviesRepository): ViewModelProvider.Factory {
 
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-            ListMoviesViewModel(repository) as T
-
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T = modelClass
+                .getConstructor(MoviesRepository::class.java)
+                .newInstance(repository)
     }
 }
