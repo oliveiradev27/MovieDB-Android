@@ -49,13 +49,19 @@ class ListMoviesActivity : AppCompatActivity() {
 
     private fun mapActionsForState(state: ListMoviesStates) {
         when (state) {
-            is ListMoviesStates.Loading -> Toast.makeText(this, "carregando..", Toast.LENGTH_LONG).show()
+            is ListMoviesStates.Loading -> toastMessage(getString(R.string.loading))
             is ListMoviesStates.LoadSuccessMovies -> {
                 movies.addAll(state.movies)
                 recyclerMovies.adapter?.notifyDataSetChanged()
             }
-            is ListMoviesStates.Error -> Toast.makeText(this, state.t.message, Toast.LENGTH_LONG).show()
+            is ListMoviesStates.Error -> toastMessage(state.t.message)
         }
+    }
+
+    private fun toastMessage(text: String?) {
+        Toast
+            .makeText(this, text, Toast.LENGTH_LONG)
+            .show()
     }
 
     private fun initializeViews() {
