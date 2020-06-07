@@ -8,9 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.espartano.moviedbapp.R
 import br.espartano.moviedbapp.data.Movie
+import br.espartano.moviedbapp.extensions.load
 import br.espartano.moviedbapp.network.configs.Configs.BASE_URL_THUMB
 import br.espartano.moviedbapp.utils.DateUtils
-import com.bumptech.glide.Glide
 
 class MoviesViewHolder(private val view: View): RecyclerView.ViewHolder(view) {
 
@@ -22,9 +22,7 @@ class MoviesViewHolder(private val view: View): RecyclerView.ViewHolder(view) {
         titleMovie.text = movie.title
         textReleaseDate.text =  DateUtils.formatDate(movie.releaseDate)
         val imageUrl = "$BASE_URL_THUMB${movie.posterPath}"
-        Glide.with(view)
-            .load(imageUrl)
-            .into(imageMovie)
+        imageMovie.load(imageUrl)
     }
 }
 

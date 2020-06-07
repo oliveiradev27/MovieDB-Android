@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.espartano.moviedbapp.R
 import br.espartano.moviedbapp.data.Movie
+import br.espartano.moviedbapp.extensions.loadGIF
 import br.espartano.moviedbapp.list.adapters.MoviesAdapter
 import br.espartano.moviedbapp.list.viewmodel.ListMoviesStates
 import br.espartano.moviedbapp.list.viewmodel.ListMoviesViewModel
-import com.bumptech.glide.Glide
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ListMoviesActivity : AppCompatActivity() {
@@ -78,11 +78,7 @@ class ListMoviesActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         recyclerMovies.layoutManager = GridLayoutManager(this, 2)
         recyclerMovies.adapter = MoviesAdapter(movies)
-        Glide
-            .with(this)
-            .asGif()
-            .load(R.mipmap.loading)
-            .into(imgLogo)
+        imgLogo.loadGIF(R.mipmap.loading)
     }
 
     private fun showLoadingState() {
