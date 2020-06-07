@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import br.espartano.moviedbapp.R
 import br.espartano.moviedbapp.data.Movie
 import br.espartano.moviedbapp.network.configs.Configs.BASE_URL_THUMB
+import br.espartano.moviedbapp.utils.DateUtils
 import com.bumptech.glide.Glide
 
 class MoviesViewHolder(private val view: View): RecyclerView.ViewHolder(view) {
@@ -19,7 +20,7 @@ class MoviesViewHolder(private val view: View): RecyclerView.ViewHolder(view) {
 
     fun bindData(movie: Movie) {
         titleMovie.text = movie.title
-        textReleaseDate.text = movie.releaseDate
+        textReleaseDate.text =  DateUtils.formatDate(movie.releaseDate)
         val imageUrl = "$BASE_URL_THUMB${movie.posterPath}"
         Glide.with(view)
             .load(imageUrl)

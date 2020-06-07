@@ -69,7 +69,7 @@ class ListMoviesActivity : AppCompatActivity() {
         AlertDialog
             .Builder(this)
             .setMessage(text)
-            .setTitle("Mensagem do sistema")
+            .setTitle(getString(R.string.system_message))
             .create()
             .show()
     }
