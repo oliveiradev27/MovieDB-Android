@@ -2,7 +2,9 @@ package br.espartano.moviedbapp.list.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import android.view.View
+import android.widget.ImageView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -14,6 +16,7 @@ import br.espartano.moviedbapp.list.adapters.MoviesAdapter
 import br.espartano.moviedbapp.list.viewmodel.ListMoviesStates
 import br.espartano.moviedbapp.list.viewmodel.ListMoviesViewModel
 import br.espartano.moviedbapp.repository.MoviesNetworkRepository
+import com.bumptech.glide.Glide
 
 class ListMoviesActivity : AppCompatActivity() {
 
@@ -25,6 +28,11 @@ class ListMoviesActivity : AppCompatActivity() {
     private val toolbar : Toolbar by lazy {
         findViewById<Toolbar>(R.id.toolbar)
     }
+
+    private val imgLogo : ImageView by lazy {
+        findViewById<ImageView>(R.id.img_loading)
+    }
+
     private val viewModel: ListMoviesViewModel by lazy {
         ViewModelProvider(this@ListMoviesActivity,
             ListMoviesViewModel.ListMoviesViewModelFactory(MoviesNetworkRepository()))
@@ -49,18 +57,25 @@ class ListMoviesActivity : AppCompatActivity() {
 
     private fun mapActionsForState(state: ListMoviesStates) {
         when (state) {
-            is ListMoviesStates.Loading -> toastMessage(getString(R.string.loading))
+            is ListMoviesStates.Loading -> showLoadingState()
             is ListMoviesStates.LoadSuccessMovies -> {
+                hideLoadingState()
                 movies.addAll(state.movies)
                 recyclerMovies.adapter?.notifyDataSetChanged()
             }
-            is ListMoviesStates.Error -> toastMessage(state.t.message)
+            is ListMoviesStates.Error -> {
+                hideLoadingState()
+                toastMessage(state.t.message)
+            }
         }
     }
 
     private fun toastMessage(text: String?) {
-        Toast
-            .makeText(this, text, Toast.LENGTH_LONG)
+        AlertDialog
+            .Builder(this)
+            .setMessage(text)
+            .setTitle("Mensagem do sistema")
+            .create()
             .show()
     }
 
@@ -68,5 +83,20 @@ class ListMoviesActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         recyclerMovies.layoutManager = GridLayoutManager(this, 2)
         recyclerMovies.adapter = MoviesAdapter(movies)
+        Glide
+            .with(this)
+            .asGif()
+            .load(R.mipmap.loading)
+            .into(imgLogo)
+    }
+
+    private fun showLoadingState() {
+        recyclerMovies.visibility = View.GONE
+        imgLogo.visibility = View.VISIBLE
+    }
+
+    private fun hideLoadingState() {
+        recyclerMovies.visibility = View.VISIBLE
+        imgLogo.visibility = View.GONE
     }
 }

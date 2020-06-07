@@ -3,6 +3,7 @@ package br.espartano.moviedbapp.list.viewmodel
 import androidx.lifecycle.*
 import br.espartano.moviedbapp.repository.MoviesRepository
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -13,6 +14,7 @@ class ListMoviesViewModel(private val repository: MoviesRepository): ViewModel()
     fun getState() : LiveData<ListMoviesStates> = states
 
     fun getPopularMovies() {
+        states.postValue(ListMoviesStates.Loading)
         viewModelScope.launch {
             withContext(IO) {
                 try {

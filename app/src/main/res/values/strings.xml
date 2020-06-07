@@ -3,4 +3,5 @@
 <string name="moviedb_logo">Aplicativo MovieDB</string>
 <string name="release_date">lançado em:</string>
     <string name="loading">carregando..</string>
+    <string name="loading_info">Carragando informações aguarde um pouco.</string>
 </resources>
