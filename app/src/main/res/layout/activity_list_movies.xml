@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:animateLayoutChanges="true"
     tools:context=".list.ui.ListMoviesActivity">
 
     <include layout="@layout/toolbar"/>
@@ -12,7 +13,16 @@
         android:id="@+id/recycler_movies"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_list_movie"
-        tools:itemCount="3"/>
+        tools:itemCount="3"
+        tools:listitem="@layout/item_list_movie" />
+
+    <ImageView
+        android:id="@+id/img_loading"
+        android:contentDescription="@string/loading_info"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@mipmap/loading"
+        android:background="@android:color/white"
+        android:visibility="gone"/>
 
 </LinearLayout>

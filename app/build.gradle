@@ -57,9 +57,14 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$glide_version"
     kapt "com.github.bumptech.glide:compiler:$glide_version"
 
+    // Koin for Kotlin apps
+    implementation "org.koin:koin-core:$koin_version"
+    implementation "org.koin:koin-android-viewmodel:$koin_version"
+
     // tests
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation "androidx.test.ext:junit:$androidx_version"
+    androidTestImplementation "androidx.test.ext:junit:$androidxTests_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$expresso_version"
     implementation 'androidx.cardview:cardview:1.0.0'
+    testImplementation "org.koin:koin-test:$koin_version"
 }
