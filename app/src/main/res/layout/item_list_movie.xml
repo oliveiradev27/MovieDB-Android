@@ -25,26 +25,28 @@
 
         <TextView
             android:id="@+id/text_title_movie"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            tools:text="Example title"
-            android:textStyle="bold"
             android:layout_margin="8dp"
             android:textSize="18sp"
-            app:layout_constraintTop_toBottomOf="@id/image_movie"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/image_movie"
-            />
+            app:layout_constraintTop_toBottomOf="@id/image_movie"
+            tools:text="Example title" />
 
         <TextView
             android:id="@+id/text_release_date_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/release_date"
-            android:textStyle="bold"
             android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@id/text_title_movie"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/text_title_movie"
-            />
+            app:layout_constraintTop_toBottomOf="@id/text_title_movie" />
 
         <TextView
             android:id="@+id/text_release_date"
