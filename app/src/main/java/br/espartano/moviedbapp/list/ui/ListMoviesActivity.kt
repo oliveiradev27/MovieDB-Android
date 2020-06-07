@@ -7,7 +7,6 @@ import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.espartano.moviedbapp.R
@@ -15,8 +14,8 @@ import br.espartano.moviedbapp.data.Movie
 import br.espartano.moviedbapp.list.adapters.MoviesAdapter
 import br.espartano.moviedbapp.list.viewmodel.ListMoviesStates
 import br.espartano.moviedbapp.list.viewmodel.ListMoviesViewModel
-import br.espartano.moviedbapp.repository.MoviesNetworkRepository
 import com.bumptech.glide.Glide
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class ListMoviesActivity : AppCompatActivity() {
 
@@ -33,11 +32,7 @@ class ListMoviesActivity : AppCompatActivity() {
         findViewById<ImageView>(R.id.img_loading)
     }
 
-    private val viewModel: ListMoviesViewModel by lazy {
-        ViewModelProvider(this@ListMoviesActivity,
-            ListMoviesViewModel.ListMoviesViewModelFactory(MoviesNetworkRepository()))
-            .get(ListMoviesViewModel::class.java)
-    }
+    private val viewModel: ListMoviesViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
