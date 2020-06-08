@@ -4,4 +4,5 @@
 <string name="release_date">lançado em:</string>
     <string name="loading">carregando..</string>
     <string name="loading_info">Carragando informações aguarde um pouco.</string>
+    <string name="system_message">Mensagem do sistema</string>
 </resources>

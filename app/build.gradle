@@ -62,7 +62,7 @@ dependencies {
     implementation "org.koin:koin-android-viewmodel:$koin_version"
 
     // tests
-    testImplementation 'junit:junit:4.12'
+    testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test.ext:junit:$androidxTests_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$expresso_version"
     implementation 'androidx.cardview:cardview:1.0.0'
