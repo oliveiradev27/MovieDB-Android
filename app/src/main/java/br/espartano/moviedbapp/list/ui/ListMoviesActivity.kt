@@ -60,12 +60,12 @@ class ListMoviesActivity : AppCompatActivity() {
             }
             is ListMoviesStates.Error -> {
                 hideLoadingState()
-                toastMessage(state.t.message)
+                showMessage(state.t.message)
             }
         }
     }
 
-    private fun toastMessage(text: String?) {
+    private fun showMessage(text: String?) {
         AlertDialog
             .Builder(this)
             .setMessage(text)
