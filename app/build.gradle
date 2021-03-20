@@ -23,6 +23,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
 }
 
 dependencies {
@@ -67,4 +77,9 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:$expresso_version"
     implementation 'androidx.cardview:cardview:1.0.0'
     testImplementation "org.koin:koin-test:$koin_version"
+    testImplementation "io.mockk:mockk:1.11.0"
+    testImplementation "io.mockk:mockk-common:1.11.0"
+    testImplementation "android.arch.core:core-testing:2.1.0"
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.3'
+
 }
