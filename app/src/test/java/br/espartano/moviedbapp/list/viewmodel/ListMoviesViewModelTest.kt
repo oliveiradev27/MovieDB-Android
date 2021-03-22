@@ -28,13 +28,30 @@ class ListMoviesViewModelTest {
         val observer = mockk<Observer<ListMoviesStates>>(relaxed = true)
         viewModel.getState().observeForever(observer)
 
-        coEvery { repository.getPopularMovies() } returns listOf()
+        coEvery { repository.getPopularMovies() } returns listOf(mockk(relaxed = true))
 
         viewModel.getPopularMovies()
 
         coVerifySequence {
             observer.onChanged(ListMoviesStates.Loading)
             observer.onChanged(ofType(ListMoviesStates.LoadSuccessMovies::class))
+        }
+    }
+
+    @Test
+    fun `getPopularMovies - must be empty state`() = runBlockingTest {
+        val (viewModel, dependencies) = createMocks()
+        val repository = dependencies.repository
+        val observer = mockk<Observer<ListMoviesStates>>(relaxed = true)
+        viewModel.getState().observeForever(observer)
+
+        coEvery { repository.getPopularMovies() } returns listOf()
+
+        viewModel.getPopularMovies()
+
+        coVerifySequence {
+            observer.onChanged(ListMoviesStates.Loading)
+            observer.onChanged(ListMoviesStates.EmptyState)
         }
     }
 
