@@ -23,8 +23,7 @@ class ListMoviesViewModelTest {
 
     @Test
     fun `getPopularMovies - must be success state`() = runBlockingTest {
-        val (viewModel, dependencies) = createMocks()
-        val repository = dependencies.repository
+        val (viewModel, repository) = makeSut()
         val observer = mockk<Observer<ListMoviesStates>>(relaxed = true)
         viewModel.getState().observeForever(observer)
 
@@ -40,8 +39,7 @@ class ListMoviesViewModelTest {
 
     @Test
     fun `getPopularMovies - must be empty state`() = runBlockingTest {
-        val (viewModel, dependencies) = createMocks()
-        val repository = dependencies.repository
+        val (viewModel, repository) = makeSut()
         val observer = mockk<Observer<ListMoviesStates>>(relaxed = true)
         viewModel.getState().observeForever(observer)
 
@@ -57,8 +55,7 @@ class ListMoviesViewModelTest {
 
     @Test
     fun `getPopularMovies - must be error state`() = runBlockingTest {
-        val (viewModel, dependencies) = createMocks()
-        val repository = dependencies.repository
+        val (viewModel, repository) = makeSut()
         val observer = mockk<Observer<ListMoviesStates>>(relaxed = true)
         viewModel.getState().observeForever(observer)
         val error = Throwable("")
@@ -73,13 +70,14 @@ class ListMoviesViewModelTest {
         }
     }
 
-    private fun createMocks(): Pair<ListMoviesViewModel, ListMoviesViewModelDependencies> {
+    private fun makeSut(): ListMoviesViewModelDependencies {
         val repository = mockk<MoviesRepository>(relaxed = true)
         val viewModel = ListMoviesViewModel(repository)
-        return Pair(viewModel, ListMoviesViewModelDependencies(repository))
+        return ListMoviesViewModelDependencies(viewModel, repository)
     }
 }
 
 data class ListMoviesViewModelDependencies(
+    val viewModel: ListMoviesViewModel,
     val repository: MoviesRepository
 )
